@@ -1,16 +1,12 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import Login from "./login";
 
 class Index extends Component {
     render() {
         return (
-            <div>
-                <Link to="/login">login</Link>
-            </div>
+            <Login/>
         )
     }
-
 }
-
 
 export default Index;
