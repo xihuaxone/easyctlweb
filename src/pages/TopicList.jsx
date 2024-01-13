@@ -22,7 +22,7 @@ function listTopics(onSuccess) {
     });
 }
 
-const topicOnlineColor = "#1676FDFF";
+const topicOnlineColor = "#2aa834";
 const topicOfflineColor = "#bebebe";
 
 export default function TopicList() {

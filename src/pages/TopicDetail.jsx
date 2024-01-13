@@ -68,7 +68,7 @@ export default function TopicDetail(props: any) {
                 <Divider orientation="center">Log</Divider>
                 <List size="small" bordered={false} dataSource={logList}
                       renderItem={(item) => <List.Item
-                          style={{textAlign: "left", fontSize: "0.8rem", lineHeight: "0.3rem"}}
+                          style={{textAlign: "left", fontSize: "0.8rem", lineHeight: "1.1rem"}}
                       >{item}</List.Item>}
                 />
             </div>

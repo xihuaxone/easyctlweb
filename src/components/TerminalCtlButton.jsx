@@ -24,7 +24,7 @@ export default function TerminalCtlButton({actionName, topicApiId, onSuccess, on
             "topicApiId": topicApiId,
         }
 
-        addLog("info", "post [/terminal/call] result = " + JSON.stringify(data));
+        addLog("info", "post [/terminal/call] with " + JSON.stringify(data));
         axiosClient({
             method: 'post',
             url: '/terminal/call',
@@ -38,7 +38,7 @@ export default function TerminalCtlButton({actionName, topicApiId, onSuccess, on
             onSuccess(topicApiId, true);
             onErrMsg(topicApiId, null);
             setCtlButtonColor(buttonDefaultColor);
-            addLog("success", "response = " + JSON.stringify(response));
+            addLog("success", "response = " + JSON.stringify(response.data));
         }).catch(function (e) {
             console.log(e);
             setErrMsgTip(e.message);
