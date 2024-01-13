@@ -1,10 +1,7 @@
 import React, {useState} from "react";
 import {useNavigate} from 'react-router-dom';
-import Password from "antd/lib/input/Password";
 import {Image, Input, Layout, Space, Tooltip} from "antd";
-import {InfoCircleOutlined, UserOutlined} from "@ant-design/icons";
 import {Content, Footer, Header} from "antd/lib/layout/layout";
-import RegisterButton from "../components/RegisterButton";
 import TopicRegisterButton from "../components/TopicRegisterButton";
 
 

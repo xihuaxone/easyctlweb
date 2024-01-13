@@ -1,4 +1,4 @@
-import {Button, Col, Divider, List, Row, Switch, Tooltip} from 'antd';
+import {Col, Divider, List, Row, Switch} from 'antd';
 import {useLocation} from "react-router-dom";
 import TerminalCtlButton from "../components/TerminalCtlButton";
 import {useEffect, useRef, useState} from "react";
