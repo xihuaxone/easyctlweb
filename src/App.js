@@ -1,4 +1,6 @@
 import './App.css';
+import "./constants/defaultStyles.css";
+
 import RouterConfig from "./router/router";
 
 function App() {

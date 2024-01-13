@@ -5,7 +5,6 @@ import Password from "antd/lib/input/Password";
 import {Button, Image, Input, Layout, Space, Tooltip} from "antd";
 import {InfoCircleOutlined, UserOutlined} from "@ant-design/icons";
 import {Content, Footer, Header} from "antd/lib/layout/layout";
-import "../constants/defaultStyles.css";
 
 export default function Login() {
     const navigate = useNavigate();

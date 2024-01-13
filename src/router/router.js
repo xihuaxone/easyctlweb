@@ -5,6 +5,7 @@ import Index from "../pages";
 import TopicList from "../pages/TopicList";
 import TopicDetail from "../pages/TopicDetail";
 import Register from "../pages/register";
+import TopicRegister from "../pages/topicRegister";
 
 
 export default function routerConfig() {
@@ -14,6 +15,7 @@ export default function routerConfig() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/topicList" element={<TopicList />}></Route>
+            <Route path="/topic/register" element={<TopicRegister />}></Route>
             <Route path="/topicDetail" element={<TopicDetail />}></Route>
         </Routes>
     )

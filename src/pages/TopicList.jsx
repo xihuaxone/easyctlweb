@@ -4,7 +4,6 @@ import React, {useEffect, useState} from "react";
 import {KeyOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 import {Content, Footer, Header} from "antd/lib/layout/layout";
-import "../constants/defaultStyles.css";
 
 function listTopics(onSuccess) {
     axiosClient({
@@ -73,7 +72,7 @@ export default function TopicList() {
             </Content>
             <Footer className={"defaultFooter"}>
                 <Button type={"primary"} onClick={() => {
-                    navigate('/register')
+                    navigate('/topic/register')
                 }} size="large" block={true}
                         style={{fontWeight: 'bold', fontSize: 'large', marginTop: "0.5rem"}}>新增设备</Button>
             </Footer>
