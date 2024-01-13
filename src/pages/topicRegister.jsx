@@ -21,7 +21,7 @@ export default function TopicRegister() {
 
     const onSuccess = isSuccess => {
         if (isSuccess) {
-            navigate('/login');
+            navigate('/topicList');
         }
     }
 
