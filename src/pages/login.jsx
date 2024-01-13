@@ -34,7 +34,8 @@ export default function Login() {
     return (
         <Layout className={"defaultLayout"}>
             <Header className={"defaultHeader"}>
-                <Image height={"100%"} src="imgs/rem.jpg" preview={false}/>
+                <Button className={"defaultBackButton"} onClick={()=>{navigate(-1)}}>Back</Button>
+                <Image style={{width: "15rem", height: "15rem"}} src="imgs/rem.png" preview={false}/>
             </Header>
             <Content className={"defaultContent"}>
                 <Space direction="vertical" size="large" style={{ display: 'flex' }}>

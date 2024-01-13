@@ -1,7 +1,7 @@
-import {Col, Divider, List, Row, Switch} from 'antd';
-import {useLocation} from "react-router-dom";
+import {Button, Col, Divider, List, Row, Switch} from 'antd';
+import {useLocation, useNavigate} from "react-router-dom";
 import TerminalCtlButton from "../components/TerminalCtlButton";
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 const terminalCtlButtonStyle = {
     color: '#ffffff',
@@ -24,6 +24,7 @@ const logStyle = {
 };
 
 export default function TopicDetail(props: any) {
+    const navigate = useNavigate();
     const logListRef = useRef(null);
     const [logList, setLogList] = useState([]);
     const [logOn, setLogOn] = useState(false);
@@ -60,6 +61,7 @@ export default function TopicDetail(props: any) {
 
     return (
         <div style={{marginBottom: "3rem", marginTop: "0rem"}}>
+            <Button className={"defaultBackButton"} onClick={()=>{navigate(-1)}}>Back</Button>
             <Switch checkedChildren="Log on" unCheckedChildren="Log off" checked={logOn} onChange={() => {
                 setLogOn(!logOn);
             }}

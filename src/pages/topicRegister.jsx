@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from 'react-router-dom';
-import {Image, Input, Layout, Space, Tooltip} from "antd";
+import {Button, Image, Input, Layout, Space, Tooltip} from "antd";
 import {Content, Footer, Header} from "antd/lib/layout/layout";
 import TopicRegisterButton from "../components/TopicRegisterButton";
 
@@ -36,7 +36,8 @@ export default function TopicRegister() {
     return (
         <Layout className={"defaultLayout"}>
             <Header className={"defaultHeader"}>
-                <Image height={"100%"} src="imgs/rem.jpg" preview={false}/>
+                <Button className={"defaultBackButton"} onClick={()=>{navigate(-1)}}>Back</Button>
+                <Image style={{width: "15rem", height: "15rem"}} src="imgs/rem.png" preview={false}/>
             </Header>
             <Content className={"defaultContent"}>
                 <Space direction="vertical" size="large" style={{display: 'flex'}}>

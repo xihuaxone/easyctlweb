@@ -52,7 +52,8 @@ export default function TopicList() {
     return (
         <Layout className={"defaultLayout"}>
             <Header className={"defaultHeader"}>
-                <Image height={"70%"} src="imgs/rem.jpg" preview={false}/>
+                <Button className={"defaultBackButton"} onClick={()=>{navigate(-1)}}>Back</Button>
+                <Image style={{width: "15rem", height: "15rem"}} src="imgs/rem.png" preview={false}/>
             </Header>
             <Content className={"defaultContent"}>
                 <Row justify={"center"}

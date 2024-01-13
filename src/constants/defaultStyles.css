@@ -27,3 +27,13 @@
     background-color: transparent;
     padding: 5rem 1rem 0.5rem;
 }
+
+.defaultBackButton {
+    position: fixed;
+    left: 0.5rem;
+    top: 0.5rem;
+    width: 5rem;
+    border-radius: 2rem;
+    font-style: italic;
+    font-weight: bold;
+}
