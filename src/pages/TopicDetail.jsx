@@ -1,8 +1,32 @@
-import {Button, Col, Divider, Row} from 'antd';
+import {Button, Col, Divider, List, Row, Switch, Tooltip} from 'antd';
 import {useLocation} from "react-router-dom";
+import TerminalCtlButton from "../components/TerminalCtlButton";
+import {useEffect, useRef, useState} from "react";
 
+const terminalCtlButtonStyle = {
+    color: '#ffffff',
+    backgroundColor: '#1676FDFF',
+    borderRadius: '2rem',
+    height: '3rem',
+    width: '8rem',
+};
+
+const logStyle = {
+    height: "20rem",
+    marginLeft: "2rem",
+    marginRight: "2rem",
+    overflow: "hidden",
+    overflowY: "scroll",
+    bordered: true,
+    borderStyle: "solid",
+    borderWidth: "2px",
+    marginTop: "1rem",
+};
 
 export default function TopicDetail(props: any) {
+    const logListRef = useRef(null);
+    const [logList, setLogList] = useState([]);
+    const [logOn, setLogOn] = useState(false);
     let location = useLocation();
     let topicDetail = location.state;
     if (Object.keys(topicDetail).length !== 1) {
@@ -11,32 +35,81 @@ export default function TopicDetail(props: any) {
     let topicStr = Object.keys(topicDetail)[0];
     let apiList = topicDetail[topicStr];
 
+    const addLog = (level: string, msg: string) => {
+        let logMsg: string = `[${level}] - ${msg}`;
+        setLogList(prevList => {
+            return [
+                ...prevList,
+                logMsg
+            ]
+        });
+    }
+
+    useEffect(() => {
+        const current = logListRef.current;
+        if (current) {
+            current.scrollTop = current.scrollHeight
+        }
+    }, [logList])
+
+    const onSuccess = (topicApiId, isSuccess) => {
+    }
+
+    const onErrMsg = (topicApiId, errMsg) => {
+    }
+
     return (
-        <p style={{marginBottom: "3rem", marginTop: "0rem"}}>
+        <div style={{marginBottom: "3rem", marginTop: "0rem"}}>
+            <Switch checkedChildren="Log on" unCheckedChildren="Log off" checked={logOn} onChange={() => {
+                setLogOn(!logOn);
+            }}
+                    style={{marginTop: "1rem", marginRight: "1rem"}}/>
+            <div style={logStyle} ref={logListRef} hidden={!logOn}>
+                <Divider orientation="center">Log</Divider>
+                <List size="small" bordered={false} dataSource={logList}
+                      renderItem={(item) => <List.Item
+                          style={{textAlign: "left", fontSize: "0.8rem", lineHeight: "0.3rem"}}
+                      >{item}</List.Item>}
+                />
+            </div>
+
             <Divider orientation="center">{topicStr}</Divider>
-            <Row justify={"start"} style={{marginLeft: "2rem", marginTop: "2rem", textAlign: "left", fontWeight: "bold"}}>
+            <Row justify={"start"}
+                 style={{marginLeft: "2rem", marginTop: "2rem", textAlign: "left", fontWeight: "bold"}}>
                 <Col span={6}><p style={{fontSize: "1rem"}}>Api</p></Col>
                 <Col span={8}><p style={{fontSize: "1rem"}}>Params</p></Col>
-                <Col span={6} ><p style={{textAlign: "center", fontSize: "1rem", width: '8rem'}}>Action</p></Col>
+                <Col span={6}><p style={{textAlign: "center", fontSize: "1rem", width: '8rem'}}>Action</p></Col>
             </Row>
             {apiList.map((apiInfo) => {
+                let topicApiId = apiInfo["id"];
                 let api = apiInfo["api"];
                 let params = apiInfo["params"];
                 let actionName = apiInfo["actionName"];
+                const getKey = (suffix: string) => {
+                    return topicApiId + suffix;
+                }
                 return (
-                    <Row justify={"start"} style={{marginLeft: "2rem", marginTop: "5rem", color: "#bebebe", textAlign: "left", fontStyle: "italic"}}>
+                    <Row justify={"start"} style={{
+                        marginLeft: "2rem",
+                        marginTop: "5rem",
+                        color: "#bebebe",
+                        textAlign: "left",
+                        fontStyle: "italic"
+                    }} key={getKey("row1")}>
                         <Col span={6}><p>{api}</p></Col>
                         <Col span={8}><p>{params}</p></Col>
-                        <Col span={6}><Button style={{
-                            color: '#ffffff',
-                            backgroundColor: '#1676FDFF',
-                            borderRadius: '2rem',
-                            height: '3rem',
-                            width: '8rem',
-                        }}>{actionName}</Button></Col>
+                        <Col span={6}>
+                            <TerminalCtlButton style={terminalCtlButtonStyle}
+                                               actionName={actionName}
+                                               topicApiId={topicApiId}
+                                               onSuccess={onSuccess}
+                                               onErrMsg={onErrMsg}
+                                               addLog={addLog}>
+                                {actionName}</TerminalCtlButton>
+                        </Col>
                     </Row>
                 );
             })}
-        </p>
+        </div>
     )
 }
