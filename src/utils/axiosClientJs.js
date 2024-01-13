@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // 第一步，创建实例
 const axiosClient = axios.create({
-    timeout: 5000
+    timeout: 10000
 });
 
 // 第二步，请求拦截

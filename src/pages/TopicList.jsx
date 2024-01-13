@@ -1,8 +1,10 @@
-import {Col, Row} from 'antd';
+import {Button, Col, Image, Layout, Row} from 'antd';
 import axiosClient from "../utils/axiosClientJs";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {KeyOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
+import {Content, Footer, Header} from "antd/lib/layout/layout";
+import "../constants/defaultStyles.css";
 
 function listTopics(onSuccess) {
     axiosClient({
@@ -49,25 +51,32 @@ export default function TopicList() {
     }, []);
 
     return (
-        <>
-            <Row justify={"start"}
-                 style={{marginLeft: "2rem", marginTop: "2rem", textAlign: "center", fontWeight: "bold"}}>
-                <Col span={8} offset={3}><p>Topic</p></Col>
-            </Row>
-            <Row justify={"start"}
-                 style={{marginLeft: "2rem", marginTop: "2rem", textAlign: "center", fontWeight: "bold"}}>
-                {topicsInfo.map((topicInfo) => {
-                    let topic = topicInfo["topic"];
-                    let apiList = topicInfo["topicApiDTOList"];
-                    return (
-                        <Col span={8} offset={3} style={{color: topicsColorMap[topic]}} onClick={() => {
-                            openTopicDetail(topic, apiList);
-                        }}>
-                            <KeyOutlined style={{fontSize: "5rem"}}/><br/>
-                            <p>{topic}</p></Col>
-                    );
-                })}
-            </Row>
-        </>
+        <Layout className={"defaultLayout"}>
+            <Header className={"defaultHeader"}>
+                <Image height={"70%"} src="imgs/rem.jpg" preview={false}/>
+            </Header>
+            <Content className={"defaultContent"}>
+                <Row justify={"center"}
+                     style={{textAlign: "center", fontWeight: "bold"}}>
+                    {topicsInfo.map((topicInfo) => {
+                        let topic = topicInfo["topic"];
+                        let apiList = topicInfo["topicApiDTOList"];
+                        return (
+                            <Col span={6} style={{color: topicsColorMap[topic]}} onClick={() => {
+                                openTopicDetail(topic, apiList);
+                            }}>
+                                <KeyOutlined style={{fontSize: "5rem"}}/><br/>
+                                <p>{topic}</p></Col>
+                        );
+                    })}
+                </Row>
+            </Content>
+            <Footer className={"defaultFooter"}>
+                <Button type={"primary"} onClick={() => {
+                    navigate('/register')
+                }} size="large" block={true}
+                        style={{fontWeight: 'bold', fontSize: 'large', marginTop: "0.5rem"}}>新增设备</Button>
+            </Footer>
+        </Layout>
     )
 }

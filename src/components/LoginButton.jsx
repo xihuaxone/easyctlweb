@@ -48,7 +48,7 @@ export default function LoginButton({loginAccount, password, onLoginSuccess, onE
     }
 
     return (
-            <Button size="large" loading={loginState===1} block={true} value="登录"
+            <Button size="large" loading={loginState===1} block={true}
                     onClick={handleClick} style={{fontWeight: 'bold', fontSize: 'large', color: "#ffffff",backgroundColor: loginButtonColor}}>登录</Button>
     );
 }

@@ -14,4 +14,11 @@ module.exports = function (app) {
             changeOrigin: false
         })
     );
+    app.use(
+        '/terminal',
+        createProxyMiddleware({
+            target: 'http://localhost:8080/',
+            changeOrigin: false
+        })
+    );
 };
