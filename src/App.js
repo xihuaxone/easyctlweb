@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       {/*<header className="App-header">*/}
-      {/*  <img src={"imgs/rem.jpg"} className="App-logo" alt="logo" />*/}
+      {/*  <img src={"imgs/rem.png"} className="App-logo" alt="logo" />*/}
       {/*</header>*/}
       <RouterConfig></RouterConfig>
     </div>
