@@ -6,6 +6,8 @@ import TopicList from "../pages/TopicList";
 import TopicDetail from "../pages/TopicDetail";
 import Register from "../pages/register";
 import TopicRegister from "../pages/topicRegister";
+import ApplyExistsTopic from "../pages/applyExistsTopic";
+import TopicActionAdd from "../pages/topicActionAdd";
 
 
 export default function routerConfig() {
@@ -16,7 +18,9 @@ export default function routerConfig() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/topicList" element={<TopicList />}></Route>
             <Route path="/topic/register" element={<TopicRegister />}></Route>
+            <Route path="/topic/applyExistsTopic" element={<ApplyExistsTopic />}></Route>
             <Route path="/topicDetail" element={<TopicDetail />}></Route>
+            <Route path="/topic/addAction" element={<TopicActionAdd />}></Route>
         </Routes>
     )
 }

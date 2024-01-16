@@ -74,6 +74,10 @@ export default function TopicList() {
                     navigate('/topic/register')
                 }} size="large" block={true}
                         style={{fontWeight: 'bold', fontSize: 'large', marginTop: "0.5rem"}}>新增设备</Button>
+                <Button type={"default"} onClick={() => {
+                    navigate('/topic/applyExistsTopic')
+                }} size="large" block={true}
+                        style={{fontWeight: 'bold', fontSize: 'large', marginTop: "0.5rem"}}>申请分享他人设备</Button>
             </Footer>
         </Layout>
     )
