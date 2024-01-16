@@ -6,7 +6,7 @@ const buttonDefaultColor = "#1676FDFF";
 const buttonBusyColor = "#595959";
 const buttonErrorColor = "#f5b235";
 
-export default function LoginButton({authExists, loginAccount, password, onLoginSuccess, onErrMsg}) {
+export default function LoginButton({autoLogin, loginAccount, password, onLoginSuccess, onErrMsg}) {
     // 0=wait login; 1=logging in; 2=login success; 3=login failed;
     const [loginState, setLoginState] = useState(0);
     const [loginButtonColor, setLoginButtonColor] = useState(buttonDefaultColor);
@@ -58,19 +58,26 @@ export default function LoginButton({authExists, loginAccount, password, onLogin
         });
     }
 
-    async function loginSuccessDelay(func, delaySeconds) {
+    async function execDelay(func, delaySeconds) {
         const sleep = ms => new Promise(r => setTimeout(r, ms));
         await sleep(delaySeconds * 1000);
-        return func();
+        func();
     }
 
     useEffect( () => {
-        loggingIn();
-        loginSuccessDelay(loginSuccess, 1);
-    }, [authExists]);
+        if (autoLogin) {
+            loggingIn();
+            execDelay(handleClick, 1);
+        }
+    }, [autoLogin]);
 
     return (
-            <Button size="large" loading={loginState===1} block={true}
+            <Button size="large" loading={loginState===1} block={true} onLoad={() => {
+                if (autoLogin) {
+                    loggingIn();
+                    execDelay(handleClick, 1);
+                }
+            }}
                     onClick={handleClick} style={{fontWeight: 'bold', fontSize: 'large', color: "#ffffff",backgroundColor: loginButtonColor}}>登录</Button>
     );
 }

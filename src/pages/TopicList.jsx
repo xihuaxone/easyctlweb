@@ -20,6 +20,7 @@ function listTopics(onSuccess) {
     }).catch(function (e) {
         console.log(e);
         alert(e.message);
+        localStorage.removeItem('Authorization');
     });
 }
 

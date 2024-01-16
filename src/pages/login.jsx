@@ -14,7 +14,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [errMsgTip, setErrMsgTip] = useState("");
     const [tipOpen, setTipOpen] = useState(false);
-    const [authExists, setAuthExists] = useState(false);
+    let autoLogin = false;
 
     const onLoginSuccess = isSuccess => {
         if (isSuccess) {
@@ -24,6 +24,7 @@ export default function Login() {
 
     const onErrMsg = errMsg => {
         if (errMsg !== null && errMsg.length > 0) {
+            autoLogin = false;
             setErrMsgTip(errMsg);
             setTipOpen(true);
         } else {
@@ -35,10 +36,7 @@ export default function Login() {
 
     return (
         <Layout className={"defaultLayout"} onLoad={async () => {
-            let auth = localStorage.getItem("Authorization");
-            if (auth != null && auth.length > 0) {
-                setAuthExists(true);
-            }
+                autoLogin = localStorage.getItem("autoLogin") !== null && localStorage.getItem("autoLogin") === "true";
         }}>
             <DefaultHeader navigate={navigate}/>
             <Content className={"defaultContent"}>
@@ -65,7 +63,7 @@ export default function Login() {
             <Footer className={"defaultFooter"}>
                 <div>
                     <Tooltip title={errMsgTip} trigger="click" open={tipOpen}>
-                        <LoginButton authExists={authExists}
+                        <LoginButton autoLogin={autoLogin}
                                      loginAccount={loginAccount}
                                      password={password}
                                      onLoginSuccess={onLoginSuccess}
