@@ -5,6 +5,7 @@ import {Button, Image, Input, Layout, Space, Tooltip} from "antd";
 import {InfoCircleOutlined, UserOutlined} from "@ant-design/icons";
 import {Content, Footer, Header} from "antd/lib/layout/layout";
 import RegisterButton from "../components/RegisterButton";
+import DefaultHeader from "../components/DefaultHeader";
 
 
 export default function Register() {
@@ -37,10 +38,7 @@ export default function Register() {
 
     return (
         <Layout className={"defaultLayout"}>
-            <Header className={"defaultHeader"}>
-                <Button className={"defaultBackButton"} onClick={()=>{navigate(-1)}}>Back</Button>
-                <Image style={{width: "15rem", height: "15rem"}} src="imgs/rem.png" preview={false}/>
-            </Header>
+            <DefaultHeader navigate={navigate}/>
             <Content className={"defaultContent"}>
                 <Space direction="vertical" size="large" style={{display: 'flex'}}>
                     <Input

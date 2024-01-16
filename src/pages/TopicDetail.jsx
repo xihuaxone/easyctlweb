@@ -65,7 +65,7 @@ export default function TopicDetail(props: any) {
             <Switch checkedChildren="Log on" unCheckedChildren="Log off" checked={logOn} onChange={() => {
                 setLogOn(!logOn);
             }}
-                    style={{marginTop: "1rem", marginRight: "1rem"}}/>
+                    style={{marginTop: "2rem", marginRight: "1rem", marginBottom: "2rem"}}/>
             <div style={logStyle} ref={logListRef} hidden={!logOn}>
                 <Divider orientation="center">Log</Divider>
                 <List size="small" bordered={false} dataSource={logList}

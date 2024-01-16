@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {Button, Image, Input, Layout, Space, Tooltip} from "antd";
 import {Content, Footer, Header} from "antd/lib/layout/layout";
 import TopicRegisterButton from "../components/TopicRegisterButton";
+import DefaultHeader from "../components/DefaultHeader";
 
 
 export default function TopicRegister() {
@@ -35,10 +36,7 @@ export default function TopicRegister() {
 
     return (
         <Layout className={"defaultLayout"}>
-            <Header className={"defaultHeader"}>
-                <Button className={"defaultBackButton"} onClick={()=>{navigate(-1)}}>Back</Button>
-                <Image style={{width: "15rem", height: "15rem"}} src="imgs/rem.png" preview={false}/>
-            </Header>
+            <DefaultHeader navigate={navigate}/>
             <Content className={"defaultContent"}>
                 <Space direction="vertical" size="large" style={{display: 'flex'}}>
                     <Input id="topic" placeholder="Enter topic"

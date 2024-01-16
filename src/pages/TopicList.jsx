@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {KeyOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 import {Content, Footer, Header} from "antd/lib/layout/layout";
+import DefaultHeader from "../components/DefaultHeader";
 
 function listTopics(onSuccess) {
     axiosClient({
@@ -51,10 +52,7 @@ export default function TopicList() {
 
     return (
         <Layout className={"defaultLayout"}>
-            <Header className={"defaultHeader"}>
-                <Button className={"defaultBackButton"} onClick={()=>{navigate(-1)}}>Back</Button>
-                <Image style={{width: "15rem", height: "15rem"}} src="imgs/rem.png" preview={false}/>
-            </Header>
+            <DefaultHeader navigate={navigate}/>
             <Content className={"defaultContent"}>
                 <Row justify={"center"}
                      style={{textAlign: "center", fontWeight: "bold"}}>
@@ -62,7 +60,7 @@ export default function TopicList() {
                         let topic = topicInfo["topic"];
                         let apiList = topicInfo["topicApiDTOList"];
                         return (
-                            <Col span={6} style={{color: topicsColorMap[topic]}} onClick={() => {
+                            <Col key={topic} span={6} style={{color: topicsColorMap[topic]}} onClick={() => {
                                 openTopicDetail(topic, apiList);
                             }}>
                                 <KeyOutlined style={{fontSize: "5rem"}}/><br/>

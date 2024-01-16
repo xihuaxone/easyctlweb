@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from 'react-router-dom';
 import LoginButton from "../components/LoginButton";
 import Password from "antd/lib/input/Password";
 import {Button, Image, Input, Layout, Space, Tooltip} from "antd";
 import {InfoCircleOutlined, UserOutlined} from "@ant-design/icons";
 import {Content, Footer, Header} from "antd/lib/layout/layout";
+import DefaultHeader from "../components/DefaultHeader";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -13,6 +14,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [errMsgTip, setErrMsgTip] = useState("");
     const [tipOpen, setTipOpen] = useState(false);
+    const [authExists, setAuthExists] = useState(false);
 
     const onLoginSuccess = isSuccess => {
         if (isSuccess) {
@@ -35,17 +37,10 @@ export default function Login() {
         <Layout className={"defaultLayout"} onLoad={async () => {
             let auth = localStorage.getItem("Authorization");
             if (auth != null && auth.length > 0) {
-                const sleep = ms => new Promise(r => setTimeout(r, ms));
-                await sleep(1000);
-                onLoginSuccess(true);
+                setAuthExists(true);
             }
         }}>
-            <Header className={"defaultHeader"}>
-                <Button className={"defaultBackButton"} onClick={() => {
-                    navigate(-1)
-                }}>Back</Button>
-                <Image style={{width: "15rem", height: "15rem"}} src="imgs/rem.png" preview={false}/>
-            </Header>
+            <DefaultHeader navigate={navigate}/>
             <Content className={"defaultContent"}>
                 <Space direction="vertical" size="large" style={{display: 'flex'}}>
                     <Input
@@ -70,7 +65,8 @@ export default function Login() {
             <Footer className={"defaultFooter"}>
                 <div>
                     <Tooltip title={errMsgTip} trigger="click" open={tipOpen}>
-                        <LoginButton loginAccount={loginAccount}
+                        <LoginButton authExists={authExists}
+                                     loginAccount={loginAccount}
                                      password={password}
                                      onLoginSuccess={onLoginSuccess}
                                      onErrMsg={onErrMsg}/>
