@@ -32,13 +32,22 @@ export default function Login() {
     }
 
     return (
-        <Layout className={"defaultLayout"}>
+        <Layout className={"defaultLayout"} onLoad={async () => {
+            let auth = localStorage.getItem("Authorization");
+            if (auth != null && auth.length > 0) {
+                const sleep = ms => new Promise(r => setTimeout(r, ms));
+                await sleep(1000);
+                onLoginSuccess(true);
+            }
+        }}>
             <Header className={"defaultHeader"}>
-                <Button className={"defaultBackButton"} onClick={()=>{navigate(-1)}}>Back</Button>
+                <Button className={"defaultBackButton"} onClick={() => {
+                    navigate(-1)
+                }}>Back</Button>
                 <Image style={{width: "15rem", height: "15rem"}} src="imgs/rem.png" preview={false}/>
             </Header>
             <Content className={"defaultContent"}>
-                <Space direction="vertical" size="large" style={{ display: 'flex' }}>
+                <Space direction="vertical" size="large" style={{display: 'flex'}}>
                     <Input
                         id="loginAccount"
                         placeholder="Enter your login account"
@@ -65,7 +74,9 @@ export default function Login() {
                                      password={password}
                                      onLoginSuccess={onLoginSuccess}
                                      onErrMsg={onErrMsg}/>
-                        <Button onClick={()=>{navigate('/register')}} size="large" block={true}
+                        <Button onClick={() => {
+                            navigate('/register')
+                        }} size="large" block={true}
                                 style={{fontWeight: 'bold', fontSize: 'large', marginTop: "0.5rem"}}>注册</Button>
                     </Tooltip>
                 </div>
