@@ -14,7 +14,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [errMsgTip, setErrMsgTip] = useState("");
     const [tipOpen, setTipOpen] = useState(false);
-    let autoLogin = false;
+    let autoLogin = true;
 
     const onLoginSuccess = isSuccess => {
         if (isSuccess) {
@@ -24,6 +24,7 @@ export default function Login() {
 
     const onErrMsg = errMsg => {
         if (errMsg !== null && errMsg.length > 0) {
+            localStorage.removeItem("Authorization");
             autoLogin = false;
             setErrMsgTip(errMsg);
             setTipOpen(true);

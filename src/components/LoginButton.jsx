@@ -58,6 +58,29 @@ export default function LoginButton({autoLogin, loginAccount, password, onLoginS
         });
     }
 
+    function authCheck() {
+        loggingIn();
+        axiosClient({
+            method: 'post',
+            url: '/auth/verify',
+            withCredentials: true
+        }).then(response => {
+            if (response.status !== 200) {
+                throw Error("unexpect exception: " + JSON.stringify(response));
+            }
+            if (!response.data.success) {
+                console.log(response.data.errMsg);
+                throw Error("user auth expired, please login manually.");
+            }
+            loginSuccess();
+
+        }).catch(function (e) {
+            console.log(e);
+            loginError(e);
+        }).finally(() => {
+        });
+    }
+
     async function execDelay(func, delaySeconds) {
         const sleep = ms => new Promise(r => setTimeout(r, ms));
         await sleep(delaySeconds * 1000);
@@ -67,7 +90,7 @@ export default function LoginButton({autoLogin, loginAccount, password, onLoginS
     useEffect( () => {
         if (autoLogin) {
             loggingIn();
-            execDelay(handleClick, 1);
+            execDelay(authCheck, 1);
         }
     }, [autoLogin]);
 
