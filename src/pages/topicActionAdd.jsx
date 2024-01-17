@@ -18,7 +18,7 @@ export default function TopicActionAdd() {
 
     let location = useLocation();
     let data = location.state;
-    const topic = Object.valueOf("topic");
+    const topic = data["topic"];
 
     const onSuccess = isSuccess => {
         if (isSuccess) {
