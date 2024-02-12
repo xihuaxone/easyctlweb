@@ -61,6 +61,12 @@ export default function TopicDetail(props: any) {
     const onErrMsg = (topicApiId, errMsg) => {
     }
 
+    const onEditSuccess = (topicApiId, isSuccess) => {
+    }
+
+    const onEditErrMsg = (topicApiId, errMsg) => {
+    }
+
     return (
         <Layout className={"defaultLayout"}>
             <Button className={"defaultBackButton"} onClick={() => {
