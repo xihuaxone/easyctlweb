@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import TerminalCtlButton from "../components/TerminalCtlButton";
 import React, {useEffect, useRef, useState} from "react";
 import {Content, Footer, Header} from "antd/lib/layout/layout";
-import DefaultHeader from "../components/DefaultHeader";
+import TopicApiEditButton from "../components/TopicApiEditButton";
 
 const terminalCtlButtonStyle = {
     color: '#ffffff',
@@ -99,6 +99,29 @@ export default function TopicDetail(props: any) {
                     const getKey = (suffix: string) => {
                         return topicApiId + suffix;
                     }
+                    const onEditable = (editable: boolean) => {
+                        let apiCol = document.getElementById("apiCol" + topicApiId);
+                        let apiParams = document.getElementById("apiParams" + topicApiId);
+                        apiCol.contentEditable = editable;
+                        apiParams.contentEditable = editable;
+                        if (editable) {
+                            apiCol.style.color = "#000000";
+                            apiParams.style.color = "#000000";
+                        } else {
+                            apiCol.style.color = "#bebebe";
+                            apiParams.style.color = "#bebebe";
+                        }
+                    }
+
+                    const getApi = () => {
+                        let apiCol = document.getElementById("apiCol" + topicApiId);
+                        return apiCol.innerHTML;
+                    }
+                    const getApiParams = () => {
+                        let apiCol = document.getElementById("apiParams" + topicApiId);
+                        return apiCol.innerHTML;
+                    }
+
                     return (
                         <Row justify={"start"} style={{
                             marginLeft: "2rem",
@@ -107,8 +130,20 @@ export default function TopicDetail(props: any) {
                             textAlign: "left",
                             fontStyle: "italic"
                         }} key={getKey("row1")}>
-                            <Col span={6}><p>{api}</p></Col>
-                            <Col span={8}><p>{params}</p></Col>
+                            <Col id={"apiCol" + topicApiId} span={3} contenteditable={"false"}>{api}</Col>
+                            <Col span={2}/>
+                            <Col id={"apiParams" + topicApiId} span={4} contenteditable={"false"}>{params}</Col>
+                            <Col span={2}/>
+                            <Col span={2}><TopicApiEditButton topicApiId={topicApiId}
+                                                              getApi={getApi}
+                                                              getParams={getApiParams}
+                                                              stat={1}
+                                                              onEditable={onEditable}
+                                                              onSuccess={onEditSuccess}
+                                                              onErrMsg={onEditErrMsg}
+                                                              addLog={addLog}
+                            >编辑</TopicApiEditButton></Col>
+                            <Col span={2}/>
                             <Col span={6}>
                                 <TerminalCtlButton style={terminalCtlButtonStyle}
                                                    actionName={actionName}
